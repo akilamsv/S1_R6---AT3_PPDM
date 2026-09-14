@@ -2,9 +2,15 @@
 
 ## Introdução da biblioteca
 
-A biblioteca expo-network permite monitorar e obter informações sobre o estado da conexão de rede e a interface de IP do dispositivo em aplicações React Native / Expo. Com ela, você pode verificar se o usuário está online, qual o tipo de conexão ativa (Wi-Fi, rede móvel, etc.) e se a internet possui acesso real.
+A biblioteca expo-network permite monitorar e obter informações sobre o estado da conexão de rede e a interface de IP do dispositivo em aplicações React Native/Expo. Com ela, você pode verificar se o usuário está online, qual o tipo de conexão ativa (Wi-Fi, rede móvel, etc.) e se a internet possui acesso real.
 
-![Instalação](instalacaoNETWORK.png)
+## Biblioteca utilizada
+
+```bash
+npx expo install expo-network
+```
+
+---
 
 A biblioteca é instalada através do comando npm expo install expo-network, depois de instalada, sua importação no projeto é fundamental para seu uso.
 
@@ -17,6 +23,7 @@ No Android, este módulo requer permissões para acessar a rede e o estado do Wi
 ```javascript
 import React, { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from "react-native";
+//importação da biblioteca
 import * as Network from 'expo-network';
 
 function InfoRow({ label, value }) {
@@ -41,6 +48,7 @@ export default function RedeWifiScreen() {
         setErrorMsg(null);
 
         try {
+            //obtendo informação da rede 
             const stateWifi = await Network.getNetworkStateAsync();
             let ip = 'Indisponível';
             let airplane = false;
@@ -58,6 +66,7 @@ export default function RedeWifiScreen() {
             }
 
             setInfo({
+                //exibindo informações
                 type: stateWifi.type ?? Network.NetworkStateType.UNKNOWN,
                 isConnected: stateWifi.isConnected ?? false,
                 isInternetReachable: stateWifi.isInternetReachable ?? false,
@@ -122,6 +131,8 @@ export default function RedeWifiScreen() {
 }
 ```
 
+## Funcionamento (print)
+
 ![Funcionamento Network](assets/funcionamentoNETWORK.png)
 
 ## Vantagens
@@ -129,3 +140,8 @@ export default function RedeWifiScreen() {
 - Verificação de Estado: Permite checar instantaneamente se o usuário está conectado à internet.
 - Endereço IP: Obtém o endereço IP atual do aparelho na rede de forma simples.
 - Já vem integrado por padrão no aplicativo de testes Expo Go. 
+
+## Conclusão
+
+A biblioteca `expo-network` facilita a obtenção de informações sobre a conexão do dispositivo, auxiliando no desenvolvimento de aplicações que dependem de internet.
+
